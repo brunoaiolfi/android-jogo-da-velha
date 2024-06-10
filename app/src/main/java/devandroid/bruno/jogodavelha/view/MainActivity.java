@@ -1,6 +1,8 @@
 package devandroid.bruno.jogodavelha.view;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -8,7 +10,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
@@ -19,6 +25,8 @@ import devandroid.bruno.jogodavelha.model.Partida;
 
 public class MainActivity extends AppCompatActivity {
 
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
     ArrayList<Button> btnBlocos;
     Button btnFinalizar;
     Jogador jogador1;
@@ -36,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Context me = this;
+        drawerLayout = findViewById(R.id.draw_view);
+        navigationView = findViewById(R.id.nav_view);
+
         btnBlocos = new ArrayList<>();
         btnFinalizar = findViewById(R.id.btnFinalizar);
 
@@ -51,6 +63,25 @@ public class MainActivity extends AppCompatActivity {
         txtPlacarJogador2.setText("Jogador 2: 0");
 
         partidaController = new PartidaController(MainActivity.this);
+
+        navigationView.bringToFront();
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.action_settings_jogar) {
+                    Toast.makeText(me, "Jogar", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.action_settings_historico) {
+                    Toast.makeText(me, "Histórico", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                drawerLayout.closeDrawer(navigationView);
+                return false;
+            }
+        });
 
         for (int i = 1; i <= 9; i++) {
             int resId = getResources().getIdentifier("bloco" + i, "id", getPackageName());
@@ -90,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         TableLayout tablePartidas = findViewById(R.id.tablePartidas);
         tablePartidas.removeAllViews();
 
-        for (Partida partida: listaPartidas) {
+        for (Partida partida : listaPartidas) {
             adicionarPartidaNaLista(partida);
         }
 
