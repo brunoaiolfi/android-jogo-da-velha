@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Context me = this;
         drawerLayout = findViewById(R.id.draw_view);
         navigationView = findViewById(R.id.nav_view);
