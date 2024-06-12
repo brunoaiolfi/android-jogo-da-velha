@@ -17,6 +17,17 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/main"/>
 
-    <include layout="@layout/activity_jogo" />
+    <LinearLayout
+        android:id="@+id/content_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

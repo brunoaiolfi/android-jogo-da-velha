@@ -1,6 +1,7 @@
 package devandroid.bruno.jogodavelha.controller;
 
 import android.content.ContentValues;
+import android.content.Context;
 
 import java.util.ArrayList;
 
@@ -11,10 +12,9 @@ import devandroid.bruno.jogodavelha.view.MainActivity;
 
 public class PartidaController extends Database implements ICrud<Partida> {
 
-    public PartidaController(MainActivity mainActivity) {
-        super(mainActivity);
+    public PartidaController(Context context) {
+        super(context);
     }
-
     public Partida salvar(Partida partida) {
         ContentValues dtoPartida = new ContentValues();
 
