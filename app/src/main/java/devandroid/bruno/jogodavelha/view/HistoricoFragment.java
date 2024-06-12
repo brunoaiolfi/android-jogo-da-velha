@@ -42,11 +42,28 @@ public class HistoricoFragment extends Fragment {
         ArrayList<Partida> listaPartidas = partidaController.listar();
         TableLayout tablePartidas = view.findViewById(R.id.tablePartidas);
         tablePartidas.removeAllViews();
+        adicionarCabecalho();
 
         for (Partida partida : listaPartidas) {
             adicionarPartidaNaLista(partida);
         }
 
+    }
+
+    public void adicionarCabecalho() {
+        TableLayout tablePartidas = view.findViewById(R.id.tablePartidas);
+
+        TableRow row = new TableRow(view.getContext());
+
+        TextView textViewId = new TextView(view.getContext());
+        textViewId.setText("Partida");
+        row.addView(textViewId);
+
+        TextView textViewVencedor = new TextView(view.getContext());
+        textViewVencedor.setText("Vencedor");
+        row.addView(textViewVencedor);
+
+        tablePartidas.addView(row);
     }
 
     public void adicionarPartidaNaLista(Partida partida) {
